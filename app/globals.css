@@ -1,0 +1,367 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 0 72% 51%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 0 72% 51%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 0 72% 51%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 0 72% 51%;
+}
+
+body {
+  @apply bg-background text-foreground;
+}
+
+.bg-cream {
+  background-color: #f9f5f0;
+}
+
+/* Custom CSS for video zoom effect */
+.video-zoom-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.video-zoom-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+  width: 100%;
+  height: 100%;
+}
+
+/* Improve text wrapping on mobile */
+p {
+  hyphens: none; /* Disable hyphenation */
+  word-wrap: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* Disable automatic text wrapping */
+.leading-tight br {
+  display: block;
+  content: "";
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  p {
+    max-width: 100%;
+    word-break: normal;
+  }
+}
+
+/* Container adjustments for mobile */
+.container {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (max-width: 640px) {
+  .container {
+    max-width: 100%;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* Compact homepage styles */
+@media (max-height: 700px) {
+  .py-3 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .mb-3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .space-y-3 > * + * {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Additional compact styles for extremely tight screens */
+@media (max-height: 600px) {
+  .home-content h2 {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .home-content p {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .home-content .space-y-2 > * + * {
+    margin-top: 0.375rem;
+  }
+}
+
+/* Android Chrome fixes */
+input,
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  font-size: 16px; /* Prevents zoom on focus in iOS */
+}
+
+/* Fix for Android Chrome dialog headers */
+[role="dialog"] h3 {
+  text-align: center;
+  width: 100%;
+}
+
+/* Fix for Android Chrome link display */
+button.underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+/* Fix for dialog content on Android */
+[role="dialog"] {
+  max-width: 100%;
+}
+
+/* Fix for dialog padding on Android */
+[role="dialog"] > div {
+  padding: 1.5rem !important;
+}
+
+/* Fix for textarea and button padding on Android */
+[role="dialog"] textarea,
+[role="dialog"] button.w-full {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* New paper texture background */
+.bg-paper {
+  background-color: #ffffff;
+  position: relative;
+}
+
+/* Use the actual paper texture image */
+.bg-paper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/paper-texture.jpg");
+  background-size: cover;
+  background-repeat: repeat;
+  opacity: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Artist name styling - increased by 2px */
+.song-title {
+  font-family: var(--font-special-elite), monospace;
+  font-size: calc(0.75rem + 2px); /* Increased by 2px from 0.75rem */
+  font-weight: 400;
+  color: #333;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+}
+
+/* Song title display styling - increased by 2px more */
+.song-title-display {
+  font-family: var(--font-special-elite), monospace;
+  font-size: calc(0.875rem + 4px); /* Increased by 2px more (from 0.875rem + 2px) */
+  font-weight: 525; /* Slightly more bold */
+  color: #333;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+}
+
+/* Grain effect overlay for video containers */
+.grain-overlay {
+  position: relative;
+}
+
+.grain-overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 10;
+  border-radius: inherit;
+}
+
+/* Enhanced paper cutout effect for video containers */
+.paper-cutout-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.paper-cutout-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.15), inset 0 0 2px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.paper-cutout-wrapper::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07), 0 2px 5px rgba(0, 0, 0, 0.07), 0 3px 3px rgba(0, 0, 0, 0.07);
+  pointer-events: none;
+  z-index: -2;
+}
+
+/* Enhance the cutout effect when video is active */
+.video-container[data-index="0"] + .paper-cutout-wrapper::before,
+.video-container[data-active="true"] + .paper-cutout-wrapper::before {
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.18), inset 0 0 4px rgba(0, 0, 0, 0.18), inset 0 0 3px rgba(0, 0, 0, 0.18);
+}
+
+/* Add subtle random texture variations to the cutout */
+.paper-cutout-wrapper:nth-child(odd)::before {
+  background: rgba(0, 0, 0, 0.035);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.14), inset 0 0 3px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.paper-cutout-wrapper:nth-child(3n)::before {
+  background: rgba(0, 0, 0, 0.045);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.16), inset 0 0 4px rgba(0, 0, 0, 0.14), inset 0 0 2px rgba(0, 0, 0, 0.12);
+}
+
+/* Fix for upload button on Chrome/macOS */
+button[aria-label="Upload video"] {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateZ(0);
+  will-change: transform;
+  position: relative;
+}
+
+/* Ensure the upload button is always clickable */
+.fixed.bottom-6.left-6 {
+  z-index: 50;
+  pointer-events: auto;
+}
+
+/* Add subtle shadow to headings for better readability on paper texture */
+h2,
+h3 {
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+/* Add subtle shadow to paragraphs for better readability */
+p {
+  text-shadow: 0 0.5px 0.5px rgba(255, 255, 255, 0.5);
+}
+
+/* iOS Safari specific fixes for upload button */
+@supports (-webkit-touch-callout: none) {
+  /* CSS specific to iOS devices */
+  .fixed.bottom-\[20px\].left-\[20px\] {
+    bottom: 20px !important;
+    left: 20px !important;
+    position: fixed !important;
+    z-index: 9999 !important; /* Ensure it's above everything */
+  }
+
+  /* Add safe area inset padding for iPhone X and newer */
+  @supports (padding: max(0px)) {
+    .fixed.bottom-\[20px\].left-\[20px\] {
+      bottom: max(20px, env(safe-area-inset-bottom)) !important;
+      left: max(20px, env(safe-area-inset-left)) !important;
+    }
+  }
+}
+
+/* Ensure the upload button is always clickable and visible */
+button[aria-label="Upload video"] {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateZ(0);
+  will-change: transform;
+  position: fixed !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important; /* Enhanced shadow */
+}
+
+/* Content on top of paper background */
+.content-layer {
+  position: relative;
+  z-index: 1;
+}
