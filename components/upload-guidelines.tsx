@@ -21,8 +21,8 @@ export default function UploadGuidelines({ onAccept, onClose }: UploadGuidelines
             <div className="text-center">
               <h3 className="font-semibold text-base mb-1">Original Acoustic Music</h3>
               <p className="text-gray-700 text-sm max-w-[280px] mx-auto">
-                For your video, please submit a live performance of your original song featuring acoustic guitar or
-                another stringed instrument, piano, or presented acapella.
+                Please submit a simple, live performance of your original song featuring just you and an acoustic
+                guitar, another stringed instrument, piano, or presented acapella. No polished music videos, please!
               </p>
             </div>
 
@@ -36,7 +36,8 @@ export default function UploadGuidelines({ onAccept, onClose }: UploadGuidelines
             <div className="text-center">
               <h3 className="font-semibold text-base mb-1">Human Performance (No AI)</h3>
               <p className="text-gray-700 text-sm max-w-[280px] mx-auto">
-                All submissions must be authentic human performances. Video verification is required to ensure this.
+                Submissions must be authentic human performances. Video verification is required to ensure this, though
+                a face is not required for non-a cappella submissions.
               </p>
             </div>
 
