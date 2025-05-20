@@ -23,7 +23,17 @@ const sampleVideos = [
     blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/river_new_22-ITlUuJptmAaHyy1Ky41cJZ8wQj8XIr.mp4",
   },
   {
-    // Video 3
+    // New Video 3
+    vimeo_id: "blob_video",
+    original_filename: "Rebel Yell",
+    timestamped_filename: "Rebel_Yell_1683657892.mp4",
+    upload_timestamp: "2023-05-11T11:30:15Z",
+    artist_name: "Luka Vukmirovic",
+    song_title: "Rebel Yell",
+    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/rebel-zEgpDduTNruvNZSPcwSMRbYEMyoKmf.mp4",
+  },
+  {
+    // Video 4 (previously Video 3)
     vimeo_id: "blob_video",
     original_filename: "Mama Tain't Long Before Day",
     timestamped_filename: "Mama_Taint_Long_Before_Day_1683657894.mp4",
