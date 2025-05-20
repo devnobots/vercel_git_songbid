@@ -21,8 +21,8 @@ export default function CopyrightNoticeDialog({ onClose }: CopyrightNoticeDialog
       {/* Notice text in light gray box */}
       <div className="bg-gray-50 rounded-lg p-5 mb-6">
         <p className="text-center text-gray-800">
-          Please note that the songs featured are cover versions used solely to illustrate a concept. No copyright
-          infringement is intended, and we deeply admire the original artists and their brilliant work.
+          Please note that the songs featured are used solely to illustrate this concept. No copyright infringement is
+          intended, and we deeply admire these artists and their work!
         </p>
       </div>
 

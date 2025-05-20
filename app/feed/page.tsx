@@ -61,10 +61,14 @@ export default function FeedPage() {
 
   // Check if this is the first visit to show the copyright notice
   useEffect(() => {
-    const hasSeenNotice = localStorage.getItem("hasSeenCopyrightNotice")
-    if (!hasSeenNotice) {
-      setShowCopyrightNotice(true)
-    }
+    // Always show the notice for testing
+    setShowCopyrightNotice(true)
+
+    // Original code (commented out during testing)
+    // const hasSeenNotice = localStorage.getItem("hasSeenCopyrightNotice")
+    // if (!hasSeenNotice) {
+    //   setShowCopyrightNotice(true)
+    // }
   }, [])
 
   // Handle closing the copyright notice
