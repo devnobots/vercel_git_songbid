@@ -14,7 +14,7 @@ const fallbackVideos = [
   {
     // Video 1
     vimeo_id: "blob_video",
-    original_filename: "Tangeld Up In AI Slop",
+    original_filename: "Tangeld Up In AI Slop!",
     timestamped_filename: "Acoustic_Guitar_Solo_1683657890.mp4",
     upload_timestamp: "2023-05-09T14:31:30Z",
     artist_name: "Zimmer Quarry Man",
