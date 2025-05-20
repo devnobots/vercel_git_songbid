@@ -20,7 +20,7 @@ const sampleVideos = [
     upload_timestamp: "2023-05-10T10:15:22Z",
     artist_name: "Sierra Eagleson",
     song_title: "River",
-    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/river_2-qpoyxa1GM7drRbwJtz022UkTP1pN1E.mp4",
+    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/river_new-5O5rOKkJpl7QmhQ7aEMXyFdZMzjqLp.mp4",
   },
   {
     // Video 3
