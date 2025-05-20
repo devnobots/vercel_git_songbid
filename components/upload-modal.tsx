@@ -189,9 +189,6 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }: Upload
                   </button>
                   <span className="text-gray-500">{file ? file.name : "no file selected"}</span>
                 </div>
-                <p className="text-xs text-gray-500 italic mt-1">
-                  Note: Your video will be converted to Black and White.
-                </p>
                 <Input
                   id="video"
                   ref={fileInputRef}

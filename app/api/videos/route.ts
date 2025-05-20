@@ -1,36 +1,36 @@
 import { NextResponse } from "next/server"
 
-// Sample videos for testing - exactly 3 videos in the specified order
+// Updated videos with the new URLs and information
 const sampleVideos = [
   {
     // Video 1
     vimeo_id: "blob_video",
     original_filename: "Tangeld Up In AI Slop!",
-    timestamped_filename: "Acoustic_Guitar_Solo_1683657890.mp4",
+    timestamped_filename: "Tangeld_Up_In_AI_Slop_1683657890.mp4",
     upload_timestamp: "2023-05-09T14:31:30Z",
     artist_name: "Zimmer Quarry Man",
-    song_title: "Tangeld Up In AI Slop",
-    blob_url: "https://moltenmike.com/videos/dylan.mp4",
+    song_title: "Tangeld Up In AI Slop!",
+    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/dylan_blue-o0VVMcM4PYSfWu7v2ASo7iC3PufgK1.mp4",
   },
   {
     // Video 2
     vimeo_id: "blob_video",
-    original_filename: "Anchors In The Sun",
-    timestamped_filename: "Piano_Ballad_1683657891.mp4",
+    original_filename: "River",
+    timestamped_filename: "River_1683657891.mp4",
     upload_timestamp: "2023-05-10T10:15:22Z",
-    artist_name: "Aussie",
-    song_title: "Anchors In The Sun",
-    blob_url: "https://moltenmike.com/videos/anchors.mp4",
+    artist_name: "Sierra Eagleson",
+    song_title: "River",
+    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/river_2-qpoyxa1GM7drRbwJtz022UkTP1pN1E.mp4",
   },
   {
     // Video 3
     vimeo_id: "blob_video",
-    original_filename: "Old Video Test",
-    timestamped_filename: "Son_Camp_Levee_1683657894.mp4",
+    original_filename: "Mama Tain't Long Before Day",
+    timestamped_filename: "Mama_Taint_Long_Before_Day_1683657894.mp4",
     upload_timestamp: "2023-05-13T13:10:45Z",
-    artist_name: "Son House",
-    song_title: "Old Video Test",
-    blob_url: "https://moltenmike.com/videos/son_camp_levee.mp4",
+    artist_name: "James Limerick Kerr",
+    song_title: "Mama Tain't Long Before Day",
+    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/aint-oPr4xVnZW8lzmdfiTaW4uimKwmefVR.mp4",
   },
 ]
 

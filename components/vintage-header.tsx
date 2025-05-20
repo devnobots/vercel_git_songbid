@@ -15,23 +15,24 @@ export default function VintageHeader({ showSubtitle = false, feedPage = false }
           <span style={{ marginLeft: "-0.08em" }}>I</span>
           <span>D</span>
         </h1>
-        {showSubtitle && (
-          <div className={`text-center ${feedPage ? "mb-1 -mt-[0.875rem]" : "mb-3 -mt-2"}`}>
+        {showSubtitle && !feedPage && (
+          <div className="mb-3 -mt-2">
             <p
               className="inline-block relative font-typewriter"
               style={{
                 fontWeight: 500,
                 color: "#333333",
-                fontSize: "18px", // Changed from 16px to 18px (+2px)
+                fontSize: "18px",
                 letterSpacing: "0.02em",
                 textTransform: "uppercase",
               }}
             >
-              {feedPage ? "DISCOVER ORIGINAL ACOUSTIC MUSIC" : '"DISCOVER ORIGINAL ACOUSTIC MUSIC"'}
+              "DISCOVER ORIGINAL ACOUSTIC MUSIC"
               <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#333333]"></span>
             </p>
           </div>
         )}
+        {feedPage && <div className="w-full max-w-[200px] h-[1px] bg-[#333333] mt-1 mb-2"></div>}
       </div>
     </div>
   )
