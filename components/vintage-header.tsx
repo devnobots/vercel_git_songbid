@@ -32,7 +32,7 @@ export default function VintageHeader({ showSubtitle = false, feedPage = false }
             </p>
           </div>
         )}
-        {feedPage && <div className="w-full max-w-[200px] h-[1px] bg-[#333333] mt-1 mb-2"></div>}
+        {feedPage && <div className="w-full max-w-[200px] h-[1px] bg-[#333333] mt-[-4px] mb-2"></div>}
       </div>
     </div>
   )

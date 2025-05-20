@@ -23,7 +23,7 @@ export default function StickyHeader() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-paper pt-[0.3125rem] pb-[0.3125rem] transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 bg-paper pt-[0.1875rem] pb-[0.1875rem] transition-all duration-300 ${
         isScrolled ? "shadow-md" : ""
       }`}
     >

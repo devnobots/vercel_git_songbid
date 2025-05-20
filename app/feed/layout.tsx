@@ -9,7 +9,7 @@ export default function FeedLayout({
   return (
     <div className="min-h-screen">
       <StickyHeader />
-      <div className="pt-28">{children}</div>
+      <div className="pt-32">{children}</div>
     </div>
   )
 }
