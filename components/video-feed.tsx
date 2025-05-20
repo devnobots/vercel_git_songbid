@@ -263,6 +263,9 @@ export default function VideoFeed({ videos, loadMoreVideos, isMuted }: VideoFeed
           />
         </div>
       ))}
+
+      {/* Add extra padding at the bottom to allow scrolling to the last video */}
+      <div className="h-[50vh] w-full"></div>
     </div>
   )
 }
