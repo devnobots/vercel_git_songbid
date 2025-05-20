@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Typewriter";
+  src: url("/fonts/typewriter.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -192,43 +200,21 @@ button.underline {
 /* New paper texture background */
 .bg-paper {
   background-color: #fffdf7;
-  position: relative;
-}
-
-/* Use the actual paper texture image */
-.bg-paper::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background-image: url("/paper-texture.jpg");
   background-size: cover;
   background-repeat: repeat;
-  opacity: 0.9;
-  pointer-events: none;
-  z-index: 0;
+  background-attachment: fixed;
 }
 
-/* Artist name styling - increased by 2px */
-.song-title {
-  font-family: var(--font-special-elite), monospace;
-  font-size: calc(0.75rem + 2px); /* Increased by 2px from 0.75rem */
-  font-weight: 400;
-  color: #333;
-  letter-spacing: 0.01em;
-  opacity: 0.9;
-}
-
-/* Song title display styling - increased by 2px more */
+/* Remove or comment out these CSS classes as we're now using inline styles */
+/* Song title display styling */
 .song-title-display {
-  font-family: var(--font-special-elite), monospace;
-  font-size: calc(0.875rem + 4px); /* Increased by 2px more (from 0.875rem + 2px) */
-  font-weight: 525; /* Slightly more bold */
-  color: #333;
-  letter-spacing: 0.01em;
-  opacity: 0.9;
+  /* These styles will be overridden by inline styles */
+}
+
+/* Artist name styling */
+.song-title {
+  /* These styles will be overridden by inline styles */
 }
 
 /* Grain effect overlay for video containers */
@@ -265,16 +251,14 @@ button.underline {
   right: -1px;
   bottom: -1px;
   border-radius: 9px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   pointer-events: none;
   z-index: -1;
 }
 
 /* Remove the existing active state styles and replace with these */
 .video-container[data-active="true"] {
-  border-color: #e84c30 !important;
-  border-width: 2px !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+  border-color: black !important; /* Changed to black for all videos */
+  border-width: 1px !important;
 }
 
 /* Add subtle random texture variations to the cutout */
@@ -351,4 +335,33 @@ button[aria-label="Upload video"] {
 .content-layer {
   position: relative;
   z-index: 1;
+}
+
+/* Typewriter font styling */
+.font-typewriter {
+  font-family: "Typewriter", "Courier New", monospace;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure the sticky header stays visible */
+.fixed {
+  position: fixed !important;
+}
+
+/* Add a subtle background to the sticky header to ensure content doesn't show through */
+header.fixed {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Ensure opacity transitions are smooth */
+.opacity-99 {
+  opacity: 0.99;
 }

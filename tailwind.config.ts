@@ -20,7 +20,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        typewriter: ["var(--font-special-elite)", "monospace"],
+        typewriter: ["Typewriter", "Courier New", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",

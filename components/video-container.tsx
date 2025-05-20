@@ -225,128 +225,138 @@ export default function VideoContainer({
 
   return (
     <div className="flex flex-col items-center w-full">
-      {/* Video container wrapper */}
+      {/* Video container */}
       <div
-        className="relative"
-        style={{ padding: "5px", backgroundColor: "#f0e9d2", borderRadius: "5px", border: "none" }}
+        ref={containerRef}
+        data-index={index}
+        data-active={isActive}
+        className="video-container relative overflow-hidden rounded-lg transition-all duration-300 ease-out"
+        style={{
+          width: `${inactiveWidth + (activeWidth - inactiveWidth) * zoomLevel}px`,
+          height: `${inactiveHeight + (activeHeight - inactiveHeight) * zoomLevel}px`,
+          backgroundColor: "#333",
+          cursor: isActive ? "pointer" : "default",
+          border: "1px solid black", // Changed to black border for all videos
+        }}
+        onClick={() => {
+          // Only open bid dialog when video is active
+          if (isActive && isLoaded) {
+            setShowBidDialog(true)
+          }
+        }}
       >
-        {/* Video container */}
-        <div
-          ref={containerRef}
-          data-index={index}
-          data-active={isActive}
-          className="video-container grain-overlay relative overflow-hidden rounded-lg transition-all duration-300 ease-out"
-          style={{
-            width: `${inactiveWidth + (activeWidth - inactiveWidth) * zoomLevel}px`,
-            height: `${inactiveHeight + (activeHeight - inactiveHeight) * zoomLevel}px`,
-            backgroundColor: "#333",
-            cursor: isActive ? "pointer" : "default",
-            border: "none",
-          }}
-          onClick={() => {
-            // Only open bid dialog when video is active
-            if (isActive && isLoaded) {
-              setShowBidDialog(true)
-            }
-          }}
-        >
-          {!isLoaded && !isError && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-600 z-10">
-              <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
-            </div>
-          )}
-
-          {isError && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-800 z-10 p-4">
-              <p className="text-white text-sm mb-4 text-center">
-                Error loading video. The video may still be processing or unavailable.
-              </p>
-              <button
-                onClick={handleRetry}
-                className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
-              >
-                Retry
-              </button>
-            </div>
-          )}
-
-          {/* Video wrapper with zoom effect */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Apply CSS to crop the top and bottom letterboxing */}
-            <div
-              className="w-full h-full relative transition-all duration-300 ease-out"
-              style={{
-                transform: `scale(${zoomScale})`,
-                transformOrigin: "center center",
-                // Reduced height adjustment for less cropping
-                height: "110%",
-                top: "-5%",
-                position: "absolute",
-                filter: videoFilter, // Apply grayscale filter based on zoom level
-                transition: "filter 0.3s ease-out", // Smooth transition for the filter
-              }}
-            >
-              {isSpecialBlobVideo ? (
-                // Use HTML5 video for blob videos
-                <video
-                  ref={videoRef}
-                  src={videoUrl}
-                  className={`absolute inset-0 w-full h-full object-cover ${
-                    isLoaded ? "opacity-100" : "opacity-0"
-                  } transition-opacity duration-300`}
-                  muted={isMuted}
-                  loop
-                  playsInline
-                  onLoadedData={() => setIsLoaded(true)}
-                  onError={() => setIsError(true)}
-                />
-              ) : (
-                // Use iframe for Vimeo videos
-                <iframe
-                  ref={iframeRef}
-                  src={embedUrl}
-                  className={`absolute inset-0 w-full h-full ${
-                    isLoaded ? "opacity-100" : "opacity-0"
-                  } transition-opacity duration-300`}
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  onLoad={() => setIsLoaded(true)}
-                  onError={() => setIsError(true)}
-                  style={{ width: "100%", height: "100%" }}
-                ></iframe>
-              )}
-            </div>
+        {!isLoaded && !isError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-600 z-10">
+            <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
           </div>
-          {/* BID Button - Only visible when video is active/playing - POSITIONED IN BOTTOM RIGHT */}
-          {isActive && isLoaded && (
-            <div className="absolute bottom-4 right-4 z-30">
-              <BidButton
-                onClick={(e) => {
-                  e.stopPropagation() // Prevent the container's onClick from also firing
-                  setShowBidDialog(true)
-                }}
+        )}
+
+        {isError && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-800 z-10 p-4">
+            <p className="text-white text-sm mb-4 text-center">
+              Error loading video. The video may still be processing or unavailable.
+            </p>
+            <button
+              onClick={handleRetry}
+              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
+        {/* Video wrapper with zoom effect */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className="w-full h-full relative transition-all duration-300 ease-out"
+            style={{
+              transform: `scale(${zoomScale})`,
+              transformOrigin: "center center",
+              filter: videoFilter, // Apply grayscale filter based on zoom level
+              transition: "filter 0.3s ease-out", // Smooth transition for the filter
+            }}
+          >
+            {isSpecialBlobVideo ? (
+              // Use HTML5 video for blob videos
+              <video
+                ref={videoRef}
+                src={videoUrl}
+                className={`absolute inset-0 w-full h-full object-cover ${
+                  isLoaded ? "opacity-100" : "opacity-0"
+                } transition-opacity duration-300`}
+                muted={isMuted}
+                loop
+                playsInline
+                onLoadedData={() => setIsLoaded(true)}
+                onError={() => setIsError(true)}
               />
-            </div>
-          )}
-
-          {/* Recording Tips Dialog */}
-          <Dialog open={showTips} onOpenChange={setShowTips}>
-            <DialogContent className="sm:max-w-md" hideCloseButton={true}>
-              <VideoRecordingTips onClose={() => setShowTips(false)} />
-            </DialogContent>
-          </Dialog>
-
-          {/* Bid Dialog */}
-          <BidDialog isOpen={showBidDialog} onClose={() => setShowBidDialog(false)} />
+            ) : (
+              // Use iframe for Vimeo videos
+              <iframe
+                ref={iframeRef}
+                src={embedUrl}
+                className={`absolute inset-0 w-full h-full ${
+                  isLoaded ? "opacity-100" : "opacity-0"
+                } transition-opacity duration-300`}
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+                onLoad={() => setIsLoaded(true)}
+                onError={() => setIsError(true)}
+                style={{ width: "100%", height: "100%" }}
+              ></iframe>
+            )}
+          </div>
         </div>
+        {/* BID Button - Only visible when video is active/playing */}
+        {isActive && isLoaded && (
+          <div className="absolute bottom-4 right-4 z-30">
+            <BidButton
+              onClick={(e) => {
+                e.stopPropagation() // Prevent the container's onClick from also firing
+                setShowBidDialog(true)
+              }}
+            />
+          </div>
+        )}
+
+        {/* Recording Tips Dialog */}
+        <Dialog open={showTips} onOpenChange={setShowTips}>
+          <DialogContent className="sm:max-w-md" hideCloseButton={true}>
+            <VideoRecordingTips onClose={() => setShowTips(false)} />
+          </DialogContent>
+        </Dialog>
+
+        {/* Bid Dialog */}
+        <BidDialog isOpen={showBidDialog} onClose={() => setShowBidDialog(false)} />
       </div>
 
-      {/* Song title above artist name - with typewriter font */}
-      <p className="song-title-display text-center mt-3 mb-1 font-typewriter">{displayFilename}</p>
+      {/* Song title with styling to match the image exactly */}
+      <p
+        className="text-center mt-3 mb-1 font-typewriter"
+        style={{
+          fontWeight: 500,
+          color: "#333333",
+          fontSize: "16px",
+          letterSpacing: "0.02em",
+        }}
+      >
+        {displayFilename}
+      </p>
 
       {/* Artist name below song title - with typewriter font */}
-      <p className="song-title text-center mb-2 font-typewriter">{video.artist_name || "A New Musician"}</p>
+      <p
+        className="text-center mb-2 font-typewriter"
+        style={{
+          fontWeight: 400,
+          color: "#333333",
+          fontSize: "14px",
+          letterSpacing: "0.02em",
+          opacity: 0.85,
+        }}
+      >
+        {video.artist_name || "A New Musician"}
+      </p>
 
       {/* Add bottom margin to create space between videos - adjusted for removed waveform */}
       <div className="h-[30px]"></div>

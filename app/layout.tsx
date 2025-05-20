@@ -1,17 +1,10 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Special_Elite } from "next/font/google"
+import { Inter } from "next/font/google"
 import "./globals.css"
 
 // Load the Inter font for general text
 const inter = Inter({ subsets: ["latin"] })
-
-// Load Special Elite - a Google Font that resembles a typewriter font
-const specialElite = Special_Elite({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-special-elite",
-})
 
 export const metadata: Metadata = {
   title: "SongBid - Discover New Acoustic Artists",
@@ -25,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${specialElite.variable}`}>
+    <html lang="en">
       <head>
         {/* Add Safari-specific meta tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -36,7 +29,7 @@ export default function RootLayout({
         {/* Add viewport meta tag to ensure proper scaling */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} bg-paper`}>{children}</body>
     </html>
   )
 }

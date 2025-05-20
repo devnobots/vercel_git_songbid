@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import Logo from "@/components/logo"
 import VideoPreloader from "@/components/video-preloader"
+import VintageHeader from "@/components/vintage-header"
 
 export default function Home() {
   return (
@@ -9,15 +9,14 @@ export default function Home() {
       {/* Add the VideoPreloader component to preload videos in the background */}
       <VideoPreloader />
 
-      {/* Logo area */}
-      <div className="w-full pt-[14px] pb-0 content-layer">
-        <div className="flex flex-col items-center">
-          <Logo />
-        </div>
-      </div>
+      {/* Logo area - replaced with vintage header */}
+      <VintageHeader />
 
       {/* Content directly on paper background */}
-      <div className="w-full pt-4 pb-1 flex flex-col px-6 max-w-md mx-auto content-layer">
+      <div
+        className="w-full pt-10 pb-1 flex flex-col px-6 max-w-md mx-auto content-layer"
+        style={{ marginTop: "-40px" }}
+      >
         {/* Main description - first paragraph now semi-bold */}
         <div className="text-center mb-7">
           <p className="mb-2 text-[16px] font-semibold">

@@ -7,9 +7,9 @@ export default function FeedLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
+    <div className="min-h-screen">
       <StickyHeader />
-      <div className="pt-24">{children}</div>
-    </>
+      <div className="pt-28">{children}</div>
+    </div>
   )
 }
