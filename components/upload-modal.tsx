@@ -179,11 +179,19 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }: Upload
                   Video File (Max 300MB)
                 </Label>
                 <div className="flex items-center border-b border-gray-300 pb-2">
-                  <button type="button" onClick={handleChooseFile} className="text-blue-500 mr-2">
+                  <button
+                    type="button"
+                    onClick={handleChooseFile}
+                    className="text-green-600 mr-2"
+                    style={{ fontSize: "14px" }}
+                  >
                     Choose File
                   </button>
                   <span className="text-gray-500">{file ? file.name : "no file selected"}</span>
                 </div>
+                <p className="text-xs text-gray-500 italic mt-1">
+                  Note: Your video will be converted to Black and White.
+                </p>
                 <Input
                   id="video"
                   ref={fileInputRef}
