@@ -360,8 +360,3 @@ header.fixed {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-
-/* Ensure opacity transitions are smooth */
-.opacity-99 {
-  opacity: 0.99;
-}

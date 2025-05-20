@@ -106,7 +106,7 @@ export default function VideoFeed({ videos, loadMoreVideos, isMuted }: VideoFeed
     }
 
     // Get all video containers
-    const containers = Array.from(feedRef.current.querySelectorAll(".video-container"))
+    const containers = videoRefs.current.filter(Boolean)
 
     // Calculate zoom level for each container based on distance from viewport center
     const newZoomLevels = [...zoomLevels]
@@ -114,20 +114,18 @@ export default function VideoFeed({ videos, loadMoreVideos, isMuted }: VideoFeed
     let maxIndex = activeIndex
 
     containers.forEach((container, index) => {
+      if (!container) return
+
       const rect = container.getBoundingClientRect()
       const containerCenter = rect.top + rect.height / 2
 
       // Calculate distance from the center of the viewport (as a percentage of viewport height)
-      // This gives us a value between 0 and 1, where 0 is at the center and 1 is at the edge
       const distanceFromCenter = Math.abs(containerCenter - viewportCenter) / (viewportHeight * 0.5)
 
       // Convert distance to zoom level using a smooth function
-      // When distance is 0 (at center), zoom is 1
-      // When distance approaches or exceeds 1 (at edge), zoom approaches 0
       let zoomLevel = Math.max(0, 1 - Math.pow(Math.min(distanceFromCenter, 1), 1.5))
 
       // Apply easing function to make transitions smoother
-      // This creates a more gradual falloff near the center and quicker falloff at the edges
       zoomLevel = Math.pow(zoomLevel, 0.8)
 
       // Ensure zoom level is between 0 and 1

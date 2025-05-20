@@ -7,7 +7,14 @@ export default function VintageHeader({ showSubtitle = false, feedPage = false }
   return (
     <div className="w-full content-layer">
       <div className="flex flex-col items-center">
-        <h1 className="text-center text-[3.5rem] font-bold text-[#333333] font-typewriter tracking-wide">SONGBID</h1>
+        <h1 className="text-center text-[3.5rem] font-bold text-[#333333] font-typewriter tracking-wide">
+          <span>S</span>
+          <span style={{ marginLeft: "-0.03em" }}>O</span>
+          <span>NG</span>
+          <span>B</span>
+          <span style={{ marginLeft: "-0.08em" }}>I</span>
+          <span>D</span>
+        </h1>
         {showSubtitle && (
           <div className={`text-center ${feedPage ? "mb-1 -mt-[0.875rem]" : "mb-3 -mt-2"}`}>
             <p
