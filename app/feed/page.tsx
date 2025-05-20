@@ -31,7 +31,7 @@ const fallbackVideos = [
     upload_timestamp: "2023-05-10T10:15:22Z",
     artist_name: "Sierra Eagleson",
     song_title: "River",
-    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/river_new-5O5rOKkJpl7QmhQ7aEMXyFdZMzjqLp.mp4",
+    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/river_new_22-ITlUuJptmAaHyy1Ky41cJZ8wQj8XIr.mp4",
   },
   {
     // Video 3
