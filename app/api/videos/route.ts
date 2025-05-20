@@ -10,7 +10,7 @@ const sampleVideos = [
     upload_timestamp: "2023-05-09T14:31:30Z",
     artist_name: "Zimmer Quarry Man",
     song_title: "Tangeld Up In AI Slop!",
-    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/dylan_blue-o0VVMcM4PYSfWu7v2ASo7iC3PufgK1.mp4",
+    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/dylan_new-1-al3YAXx4Q0yfR3N1AYmL8jmjyiofYi.mp4",
   },
   {
     // Video 2

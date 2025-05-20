@@ -20,9 +20,9 @@ export default function ArtistBioDialog({
   isOpen,
   onClose,
   artistName = "Silver Rayleigh",
-  artistImage = "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/140624_bob_dylan_1457_fc36cf65fb1e95993f7f2af408bc9600_nbcnews_ux_2880_1000-ixLAmTllDHCcOfmflLPMAqKCn66o9b.jpg",
+  artistImage = "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/140624_bob_dylan_1457_fc36cf65fb1e95993f7f2af408bc9600_nbcnews_ux_2880_1000-ixLAmTllDHCcOfmflLPMAqKCn66o9b-PYqj1smKspK00S8CVIoXaaKbo8hT3n.jpg",
   location = "Sunnyvale, CA",
-  bio = "Silver Rayleigh is a singer-songwriter with a passion for acoustic folk music. Drawing inspiration from legends like Bob Dylan and Joni Mitchell, Silver crafts intimate songs that tell stories of personal journeys and observations of everyday life.",
+  bio = "Bob Dylan is an American singer-songwriter, author and visual artist. Often regarded as one of the greatest songwriters of all time, Dylan has been a major figure in popular culture for more than 50 years. His most celebrated work dates from the 1960s, when songs such as 'Blowin' in the Wind' and 'The Times They Are a-Changin'' became anthems for the civil rights and anti-war movements.",
 }: ArtistBioDialogProps) {
   const [showFundScreen, setShowFundScreen] = useState(false)
   const [imageError, setImageError] = useState(false)
