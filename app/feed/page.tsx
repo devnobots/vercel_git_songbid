@@ -8,6 +8,8 @@ import VideoFeed from "@/components/video-feed"
 import UploadButton from "@/components/upload-button"
 import type { VideoData } from "@/types/video"
 import { useVideoStore } from "@/lib/store"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import CopyrightNoticeDialog from "@/components/copyright-notice-dialog"
 
 // Updated hardcoded sample videos as fallback with the new videos
 const fallbackVideos = [
@@ -55,6 +57,21 @@ export default function FeedPage() {
   const initialLoadAttemptedRef = useRef(false)
   const isLoadingRef = useRef(false)
   const hasMoreVideosRef = useRef(true)
+  const [showCopyrightNotice, setShowCopyrightNotice] = useState(false)
+
+  // Check if this is the first visit to show the copyright notice
+  useEffect(() => {
+    const hasSeenNotice = localStorage.getItem("hasSeenCopyrightNotice")
+    if (!hasSeenNotice) {
+      setShowCopyrightNotice(true)
+    }
+  }, [])
+
+  // Handle closing the copyright notice
+  const handleCloseCopyrightNotice = () => {
+    localStorage.setItem("hasSeenCopyrightNotice", "true")
+    setShowCopyrightNotice(false)
+  }
 
   // Function to load videos with debounce
   const loadMoreVideos = async () => {
@@ -171,6 +188,13 @@ export default function FeedPage() {
 
   return (
     <main className="min-h-screen bg-paper">
+      {/* Copyright Notice Dialog */}
+      <Dialog open={showCopyrightNotice} onOpenChange={setShowCopyrightNotice}>
+        <DialogContent className="sm:max-w-md p-0 border-0">
+          <CopyrightNoticeDialog onClose={handleCloseCopyrightNotice} />
+        </DialogContent>
+      </Dialog>
+
       {error && (
         <div className="w-full px-4 mx-auto mt-4 relative z-10">
           <div className="bg-red-100 text-red-700 rounded-md p-4">
