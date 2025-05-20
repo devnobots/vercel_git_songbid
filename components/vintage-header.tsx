@@ -22,7 +22,7 @@ export default function VintageHeader({ showSubtitle = false, feedPage = false }
               style={{
                 fontWeight: 500,
                 color: "#333333",
-                fontSize: "16px",
+                fontSize: "18px", // Changed from 16px to 18px (+2px)
                 letterSpacing: "0.02em",
                 textTransform: "uppercase",
               }}
