@@ -59,10 +59,6 @@ export default function VideoContainer({
     containerRef.current.style.width = `${width}px`
     containerRef.current.style.height = `${height}px`
 
-    // Update border opacity based on zoom level
-    containerRef.current.style.borderColor = `rgba(232, 76, 48, ${zoomLevel})`
-    containerRef.current.style.borderWidth = zoomLevel > 0.5 ? "2px" : "0px"
-
     if (isActive) {
       wasActiveRef.current = true
     }
@@ -229,9 +225,12 @@ export default function VideoContainer({
 
   return (
     <div className="flex flex-col items-center w-full">
-      {/* Video container wrapper with paper cutout effect */}
-      <div className="paper-cutout-wrapper">
-        {/* Video container - Added grain-overlay class */}
+      {/* Video container wrapper */}
+      <div
+        className="relative"
+        style={{ padding: "5px", backgroundColor: "#f0e9d2", borderRadius: "5px", border: "none" }}
+      >
+        {/* Video container */}
         <div
           ref={containerRef}
           data-index={index}
@@ -241,10 +240,8 @@ export default function VideoContainer({
             width: `${inactiveWidth + (activeWidth - inactiveWidth) * zoomLevel}px`,
             height: `${inactiveHeight + (activeHeight - inactiveHeight) * zoomLevel}px`,
             backgroundColor: "#333",
-            borderColor: "rgba(232, 76, 48, 1)",
-            borderStyle: "solid",
-            borderWidth: zoomLevel > 0.5 ? "2px" : "0px",
-            cursor: isActive ? "pointer" : "default", // Add cursor pointer when active
+            cursor: isActive ? "pointer" : "default",
+            border: "none",
           }}
           onClick={() => {
             // Only open bid dialog when video is active

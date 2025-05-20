@@ -20,7 +20,7 @@ export default function Home() {
       <div className="w-full pt-4 pb-1 flex flex-col px-6 max-w-md mx-auto content-layer">
         {/* Main description - first paragraph now semi-bold */}
         <div className="text-center mb-7">
-          <p className="mb-2 text-[15px] font-semibold">
+          <p className="mb-2 text-[16px] font-semibold">
             Discover new original acoustic music. <br />
             Free from AI fakery!
           </p>
