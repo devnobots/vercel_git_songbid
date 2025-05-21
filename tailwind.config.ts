@@ -21,6 +21,7 @@ const config = {
     extend: {
       fontFamily: {
         typewriter: ["Typewriter", "Courier New", "monospace"],
+        elegantTypewriter: ["Elegant Typewriter", "Courier New", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",

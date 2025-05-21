@@ -19,29 +19,32 @@ export default function Home() {
       >
         {/* Main description - first paragraph now semi-bold */}
         <div className="text-center mb-7">
-          <p className="mb-2 text-[16px] font-semibold">
-            Discover new original acoustic music. <br />
+          <p className="mb-2 text-[18px] font-semibold font-elegantTypewriter" style={{ color: "#2d3748" }}>
             Free from AI fakery!
           </p>
-          <p className="text-[15px]">
+          <p className="text-[15px] font-elegantTypewriter">
             Experience the talent of real musicians performing on acoustic instruments or singing genuine acapella{" "}
             <br />– all verified by video.
           </p>
         </div>
 
-        {/* For Artists section - reduced font size by 1px */}
+        {/* For Artists section - increased font size by 1px */}
         <div className="flex flex-col items-center text-center mb-6">
-          <h3 className="text-[18px] font-semibold mb-2">Artists</h3>
-          <p className="text-sm">
+          <h3 className="text-[18px] font-semibold mb-2 font-elegantTypewriter" style={{ color: "#2d3748" }}>
+            Artists
+          </h3>
+          <p className="text-[15px] font-elegantTypewriter">
             This is your chance to shine with authentic performances and receive{" "}
             <span className="text-primary font-bold">90%</span> of all bid revenue and direct financial support!
           </p>
         </div>
 
-        {/* For Supporters section - reduced font size by 1px */}
+        {/* For Supporters section - increased font size by 1px */}
         <div className="flex flex-col items-center text-center mb-7">
-          <h3 className="text-[18px] font-semibold mb-2">Supporters</h3>
-          <p className="text-sm">
+          <h3 className="text-[18px] font-semibold mb-2 font-elegantTypewriter" style={{ color: "#2d3748" }}>
+            Supporters
+          </h3>
+          <p className="text-[15px] font-elegantTypewriter">
             Your contributions directly fuel these emerging talents, and the top contributors gain prominent recognition
             in the community!
           </p>

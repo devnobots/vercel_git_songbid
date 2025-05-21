@@ -7,32 +7,20 @@ export default function VintageHeader({ showSubtitle = false, feedPage = false }
   return (
     <div className="w-full content-layer">
       <div className="flex flex-col items-center">
-        <h1 className="text-center text-[3.5rem] font-bold text-[#333333] font-typewriter tracking-wide">
-          <span>S</span>
-          <span style={{ marginLeft: "-0.03em" }}>O</span>
-          <span>NG</span>
-          <span>B</span>
-          <span style={{ marginLeft: "-0.08em" }}>I</span>
-          <span>D</span>
-        </h1>
-        {showSubtitle && !feedPage && (
-          <div className="mb-3 -mt-2">
-            <p
-              className="inline-block relative font-typewriter"
-              style={{
-                fontWeight: 500,
-                color: "#333333",
-                fontSize: "18px",
-                letterSpacing: "0.02em",
-                textTransform: "uppercase",
-              }}
-            >
-              "DISCOVER ORIGINAL ACOUSTIC MUSIC"
-              <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#333333]"></span>
-            </p>
-          </div>
-        )}
-        {feedPage && <div className="w-full max-w-[200px] h-[1px] bg-[#333333] mt-[-4px] mb-2"></div>}
+        {/* Use different dimensions based on whether it's the feed page or not */}
+        <div className={`${feedPage ? "w-[308px] h-[123px]" : "w-[438px] h-[175px]"} relative`}>
+          <img
+            src={
+              feedPage
+                ? "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/songbid_hand_logo_line_darker-HdO8CNhiQttGt34pCWl3WmeQmf87U9.png"
+                : "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/songbid_hand_logo_no_line_darker-zzdjKwWvdaPQdd8yma2KUaZuQObwdG.png"
+            }
+            alt="SONGBID"
+            className="w-full h-full object-contain"
+          />
+        </div>
+
+        {/* Removed the additional horizontal line that was appearing below the logo on the feed page */}
       </div>
     </div>
   )

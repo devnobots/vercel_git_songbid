@@ -10,6 +10,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Elegant Typewriter";
+  src: url("/fonts/ELEGANT_TYPEWRITER_Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Elegant Typewriter";
+  src: url("/fonts/ELEGANT_TYPEWRITER_Regular.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -359,4 +375,12 @@ header.fixed {
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+.font-elegant-typewriter {
+  font-family: "Elegant Typewriter", "Courier New", monospace;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
