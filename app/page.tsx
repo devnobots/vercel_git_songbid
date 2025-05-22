@@ -14,12 +14,12 @@ export default function Home() {
 
       {/* Content directly on paper background */}
       <div
-        className="w-full pt-10 pb-1 flex flex-col px-6 max-w-md mx-auto content-layer"
-        style={{ marginTop: "-40px" }}
+        className="w-full pt-2 sm:pt-10 pb-1 flex flex-col px-6 max-w-md mx-auto content-layer"
+        style={{ marginTop: "-20px", "@media (min-width: 640px)": { marginTop: "-40px" } }}
       >
         {/* Main description - first paragraph now semi-bold */}
-        <div className="text-center mb-7">
-          <p className="mb-2 text-[18px] font-semibold font-elegantTypewriter" style={{ color: "#2d3748" }}>
+        <div className="text-center mb-4 sm:mb-7">
+          <p className="mb-1 sm:mb-2 text-[18px] font-semibold font-elegantTypewriter" style={{ color: "#2d3748" }}>
             Discover New Acoustic Music <br />
             Free from AI fakery!
           </p>
@@ -30,8 +30,8 @@ export default function Home() {
         </div>
 
         {/* For Artists section - increased font size by 1px */}
-        <div className="flex flex-col items-center text-center mb-6">
-          <h3 className="text-[18px] font-semibold mb-2 font-elegantTypewriter" style={{ color: "#2d3748" }}>
+        <div className="flex flex-col items-center text-center mb-3 sm:mb-6">
+          <h3 className="text-[18px] font-semibold mb-1 sm:mb-2 font-elegantTypewriter" style={{ color: "#2d3748" }}>
             Artists
           </h3>
           <p className="text-[15px] font-elegantTypewriter">
@@ -41,8 +41,8 @@ export default function Home() {
         </div>
 
         {/* For Supporters section - increased font size by 1px */}
-        <div className="flex flex-col items-center text-center mb-7">
-          <h3 className="text-[18px] font-semibold mb-2 font-elegantTypewriter" style={{ color: "#2d3748" }}>
+        <div className="flex flex-col items-center text-center mb-4 sm:mb-7">
+          <h3 className="text-[18px] font-semibold mb-1 sm:mb-2 font-elegantTypewriter" style={{ color: "#2d3748" }}>
             Supporters
           </h3>
           <p className="text-[15px] font-elegantTypewriter">
@@ -52,7 +52,7 @@ export default function Home() {
         </div>
 
         {/* Buttons */}
-        <div className="flex flex-col gap-3 mb-4 w-full">
+        <div className="flex flex-col gap-2 sm:gap-3 mb-4 w-full">
           <Link href="/feed" className="w-full">
             <Button className="w-full bg-[#e84c30] hover:bg-[#e84c30]/90 text-white py-2 text-base h-auto shadow-sm">
               Begin (with music!)
