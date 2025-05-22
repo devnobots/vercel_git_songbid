@@ -20,6 +20,7 @@ export default function Home() {
         {/* Main description - first paragraph now semi-bold */}
         <div className="text-center mb-7">
           <p className="mb-2 text-[18px] font-semibold font-elegantTypewriter" style={{ color: "#2d3748" }}>
+            Discover New Acoustic Music <br />
             Free from AI fakery!
           </p>
           <p className="text-[15px] font-elegantTypewriter">
