@@ -333,7 +333,7 @@ export default function VideoContainer({
 
       {/* Song title with styling to match the image exactly */}
       <p
-        className="text-center mt-3 mb-1 font-typewriter"
+        className="text-center mt-3 mb-1 font-elegant-typewriter"
         style={{
           fontWeight: 500,
           color: "#333333",
@@ -344,9 +344,9 @@ export default function VideoContainer({
         {displayFilename}
       </p>
 
-      {/* Artist name below song title - with typewriter font */}
+      {/* Artist name below song title - with elegant typewriter font */}
       <p
-        className="text-center mb-2 font-typewriter"
+        className="text-center mb-2 font-elegant-typewriter"
         style={{
           fontWeight: 400,
           color: "#333333",
