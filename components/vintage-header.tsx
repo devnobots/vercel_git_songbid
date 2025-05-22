@@ -8,7 +8,7 @@ export default function VintageHeader({ showSubtitle = false, feedPage = false }
     <div className="w-full content-layer">
       <div className="flex flex-col items-center">
         {/* Use different dimensions based on whether it's the feed page or not */}
-        <div className={`${feedPage ? "h-[123px]" : "h-[175px]"} relative`}>
+        <div className={`${feedPage ? "h-[117px]" : "h-[175px]"} relative`}>
           <img
             src={
               feedPage
