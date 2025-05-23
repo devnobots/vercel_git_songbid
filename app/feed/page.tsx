@@ -24,14 +24,14 @@ const fallbackVideos = [
     blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/dylan_new-1-al3YAXx4Q0yfR3N1AYmL8jmjyiofYi.mp4",
   },
   {
-    // Video 2
-    vimeo_id: "blob_video",
+    // Video 2 - River with MUX HLS stream
+    vimeo_id: "mux_video",
     original_filename: "River",
     timestamped_filename: "River_1683657891.mp4",
     upload_timestamp: "2023-05-10T10:15:22Z",
     artist_name: "Sierra Eagleson",
     song_title: "River",
-    blob_url: "https://dg9gcoxo6erv82nw.public.blob.vercel-storage.com/river_new_22-ITlUuJptmAaHyy1Ky41cJZ8wQj8XIr.mp4",
+    blob_url: "https://stream.mux.com/kRZVpHgCzwfk4IM00TXecxxGb6kgdyc6DpqiUsfEMweQ.m3u8",
   },
   {
     // New Video 3

@@ -26,6 +26,7 @@ export default function VideoContainer({
   const containerRef = useRef<HTMLDivElement>(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const muxPlayerRef = useRef<any>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isError, setIsError] = useState(false)
   const [retryCount, setRetryCount] = useState(0)
@@ -35,9 +36,28 @@ export default function VideoContainer({
   const [showTips, setShowTips] = useState(false)
   const [showBidDialog, setShowBidDialog] = useState(false)
   const videoLoadTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const [muxPlayerLoaded, setMuxPlayerLoaded] = useState(false)
 
-  // Check if this is a blob video (either by ID or by having a blob_url)
-  const isSpecialBlobVideo = video.vimeo_id === "blob_video" || !!video.blob_url
+  // Check if this is the MUX River video specifically
+  const isMuxVideo = video.vimeo_id === "mux_video" && video.original_filename === "River"
+
+  // Check if this is a blob video or MUX video
+  const isSpecialBlobVideo = video.vimeo_id === "blob_video" || isMuxVideo || !!video.blob_url
+
+  // Load MUX Player script if this is a MUX video
+  useEffect(() => {
+    if (isMuxVideo && !muxPlayerLoaded) {
+      const script = document.createElement("script")
+      script.src = "https://cdn.jsdelivr.net/npm/@mux/mux-player"
+      script.onload = () => setMuxPlayerLoaded(true)
+      script.onerror = () => setIsError(true)
+      document.head.appendChild(script)
+
+      return () => {
+        // Don't remove the script as other components might need it
+      }
+    }
+  }, [isMuxVideo, muxPlayerLoaded])
 
   // Calculate new dimensions (10% larger for active from the previous size)
   // Previous active: 280px width, 231px height
@@ -70,7 +90,11 @@ export default function VideoContainer({
     if (isActive !== previousActiveState.current) {
       // If video becomes active
       if (isActive) {
-        if (isSpecialBlobVideo && videoRef.current) {
+        if (isMuxVideo && muxPlayerRef.current) {
+          // Control MUX Player
+          muxPlayerRef.current.currentTime = 0
+          muxPlayerRef.current.play().catch((err: any) => console.error(`Error playing MUX video ${index}:`, err))
+        } else if (isSpecialBlobVideo && videoRef.current) {
           // Always reset to beginning and play for HTML5 video
           videoRef.current.currentTime = 0
           videoRef.current.play().catch((err) => console.error(`Error playing video ${index}:`, err))
@@ -86,7 +110,11 @@ export default function VideoContainer({
         }
       } else {
         // If video becomes inactive - ALWAYS pause and reset
-        if (isSpecialBlobVideo && videoRef.current) {
+        if (isMuxVideo && muxPlayerRef.current) {
+          // Control MUX Player
+          muxPlayerRef.current.pause()
+          muxPlayerRef.current.currentTime = 0
+        } else if (isSpecialBlobVideo && videoRef.current) {
           videoRef.current.pause()
           videoRef.current.currentTime = 0
         } else if (iframeRef.current) {
@@ -101,13 +129,16 @@ export default function VideoContainer({
       // Update previous state
       previousActiveState.current = isActive
     }
-  }, [isActive, index, isSpecialBlobVideo])
+  }, [isActive, index, isSpecialBlobVideo, isMuxVideo])
 
   // Additional effect to ensure videos are paused when not visible or active
   useEffect(() => {
     // If not visible or not active, ensure video is paused
     if (!isVisible || !isActive) {
-      if (isSpecialBlobVideo && videoRef.current) {
+      if (isMuxVideo && muxPlayerRef.current) {
+        muxPlayerRef.current.pause()
+        muxPlayerRef.current.currentTime = 0
+      } else if (isSpecialBlobVideo && videoRef.current) {
         videoRef.current.pause()
         // Reset to beginning when inactive
         videoRef.current.currentTime = 0
@@ -116,12 +147,15 @@ export default function VideoContainer({
 
     // If visible and active, ensure video is playing
     if (isVisible && isActive) {
-      if (isSpecialBlobVideo && videoRef.current) {
+      if (isMuxVideo && muxPlayerRef.current) {
+        muxPlayerRef.current.currentTime = 0
+        muxPlayerRef.current.play().catch((err: any) => console.error(`Error playing MUX video ${index}:`, err))
+      } else if (isSpecialBlobVideo && videoRef.current) {
         videoRef.current.currentTime = 0
         videoRef.current.play().catch((err) => console.error(`Error playing video ${index}:`, err))
       }
     }
-  }, [isVisible, isActive, isSpecialBlobVideo, index])
+  }, [isVisible, isActive, isSpecialBlobVideo, isMuxVideo, index])
 
   // Reset error state when video changes or becomes active
   useEffect(() => {
@@ -144,7 +178,10 @@ export default function VideoContainer({
 
         // If visibility changed from visible to not visible, pause video
         if (wasVisible && !entry.isIntersecting) {
-          if (isSpecialBlobVideo && videoRef.current) {
+          if (isMuxVideo && muxPlayerRef.current) {
+            muxPlayerRef.current.pause()
+            muxPlayerRef.current.currentTime = 0
+          } else if (isSpecialBlobVideo && videoRef.current) {
             videoRef.current.pause()
             videoRef.current.currentTime = 0
           }
@@ -158,7 +195,7 @@ export default function VideoContainer({
     return () => {
       observer.disconnect()
     }
-  }, [isSpecialBlobVideo])
+  }, [isSpecialBlobVideo, isMuxVideo])
 
   // Add timeout to detect video loading failures
   useEffect(() => {
@@ -200,7 +237,13 @@ export default function VideoContainer({
     setRetryCount((prev) => prev + 1)
 
     // Reload the iframe or video
-    if (isSpecialBlobVideo && videoRef.current) {
+    if (isMuxVideo && muxPlayerRef.current) {
+      // For MUX player, try to reload
+      const playbackId = video.blob_url?.split("/").pop()?.split(".")[0]
+      if (playbackId && muxPlayerRef.current) {
+        muxPlayerRef.current.setAttribute("playback-id", playbackId)
+      }
+    } else if (isSpecialBlobVideo && videoRef.current) {
       videoRef.current.load()
     } else if (iframeRef.current) {
       const src = iframeRef.current.src
@@ -215,8 +258,9 @@ export default function VideoContainer({
   // Use a more gradual easing function for smoother transitions
   const zoomScale = 0.933 + zoomLevel * 0.063
 
-  // Get the correct video URL
+  // Get the correct video URL or playback ID
   const videoUrl = video.blob_url || ""
+  const playbackId = isMuxVideo ? videoUrl.split("/").pop()?.split(".")[0] : null
 
   // Calculate grayscale filter based on zoom level
   // When zoom level is 0, apply 100% grayscale; when zoom level is 1, apply 0% grayscale
@@ -276,7 +320,26 @@ export default function VideoContainer({
               transition: "filter 0.3s ease-out", // Smooth transition for the filter
             }}
           >
-            {isSpecialBlobVideo ? (
+            {isMuxVideo && muxPlayerLoaded && playbackId ? (
+              // Use MUX Player for the River video
+              <mux-player
+                ref={muxPlayerRef}
+                playback-id={playbackId}
+                muted={isMuted}
+                loop
+                autoplay={isActive ? "true" : "false"}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  "--controls": "none",
+                  "--media-object-fit": "cover",
+                  "--media-object-position": "center",
+                }}
+                className={`absolute inset-0 ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}
+                onLoadedData={() => setIsLoaded(true)}
+                onError={() => setIsError(true)}
+              />
+            ) : isSpecialBlobVideo ? (
               // Use HTML5 video for blob videos
               <video
                 ref={videoRef}
