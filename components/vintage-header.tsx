@@ -10,11 +10,7 @@ export default function VintageHeader({ showSubtitle = false, feedPage = false }
         {/* Use different dimensions based on whether it's the feed page or not */}
         <div className={`${feedPage ? "h-[117px]" : "h-[175px]"} relative`}>
           <img
-            src={
-              feedPage
-                ? "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo_bare-eP4CzwxWTNsMslml5PSKDU0U2KZe1A.png"
-                : "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo_bare_2-FZCPsTrBJ1htCFEVNNjKPW7gdBBWUU.png"
-            }
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/SongBid_darker-6JQyDQAgoKWVvaj596RB2zsaeC40kd.png"
             alt="SONGBID"
             className="h-full object-contain"
           />
