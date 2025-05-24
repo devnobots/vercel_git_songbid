@@ -36,8 +36,11 @@ export default function VideoContainer({
   const [showBidDialog, setShowBidDialog] = useState(false)
   const videoLoadTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  // Check if this is a blob video (either by ID or by having a blob_url)
-  const isSpecialBlobVideo = video.vimeo_id === "blob_video" || !!video.blob_url
+  // Check if this is a MUX HLS video
+  const isMuxVideo = video.blob_url?.includes("stream.mux.com") && video.blob_url?.includes(".m3u8")
+
+  // Check if this is a blob video (either by ID or by having a blob_url) or MUX video
+  const isSpecialBlobVideo = video.vimeo_id === "blob_video" || (!!video.blob_url && !isMuxVideo)
 
   // Calculate new dimensions (10% larger for active from the previous size)
   // Previous active: 280px width, 231px height
@@ -122,6 +125,54 @@ export default function VideoContainer({
       }
     }
   }, [isVisible, isActive, isSpecialBlobVideo, index])
+
+  // Load HLS.js for MUX videos
+  useEffect(() => {
+    if (isMuxVideo && videoRef.current) {
+      const loadHLS = async () => {
+        try {
+          // Dynamically import HLS.js
+          const Hls = (await import("hls.js")).default
+
+          if (Hls.isSupported()) {
+            const hls = new Hls()
+            hls.loadSource(video.blob_url!)
+            hls.attachMedia(videoRef.current!)
+
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              setIsLoaded(true)
+            })
+
+            hls.on(Hls.Events.ERROR, (event, data) => {
+              console.error("HLS error:", data)
+              setIsError(true)
+            })
+
+            // Store hls instance for cleanup
+            ;(videoRef.current as any).hlsInstance = hls
+          } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
+            // Native HLS support (Safari)
+            videoRef.current.src = video.blob_url!
+            setIsLoaded(true)
+          } else {
+            setIsError(true)
+          }
+        } catch (error) {
+          console.error("Error loading HLS:", error)
+          setIsError(true)
+        }
+      }
+
+      loadHLS()
+
+      return () => {
+        // Cleanup HLS instance
+        if (videoRef.current && (videoRef.current as any).hlsInstance) {
+          ;(videoRef.current as any).hlsInstance.destroy()
+        }
+      }
+    }
+  }, [isMuxVideo, video.blob_url])
 
   // Reset error state when video changes or becomes active
   useEffect(() => {
@@ -276,18 +327,18 @@ export default function VideoContainer({
               transition: "filter 0.3s ease-out", // Smooth transition for the filter
             }}
           >
-            {isSpecialBlobVideo ? (
-              // Use HTML5 video for blob videos
+            {isSpecialBlobVideo || isMuxVideo ? (
+              // Use HTML5 video for blob videos and MUX HLS
               <video
                 ref={videoRef}
-                src={videoUrl}
+                src={!isMuxVideo ? videoUrl : undefined} // Don't set src for MUX videos, HLS.js will handle it
                 className={`absolute inset-0 w-full h-full object-cover ${
                   isLoaded ? "opacity-100" : "opacity-0"
                 } transition-opacity duration-300`}
                 muted={isMuted}
                 loop
                 playsInline
-                onLoadedData={() => setIsLoaded(true)}
+                onLoadedData={() => !isMuxVideo && setIsLoaded(true)} // Only set loaded for non-MUX videos
                 onError={() => setIsError(true)}
               />
             ) : (
