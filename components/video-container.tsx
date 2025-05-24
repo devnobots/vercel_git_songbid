@@ -73,8 +73,8 @@ export default function VideoContainer({
     if (isActive !== previousActiveState.current) {
       // If video becomes active
       if (isActive) {
-        if (isSpecialBlobVideo && videoRef.current) {
-          // Always reset to beginning and play for HTML5 video
+        if ((isSpecialBlobVideo || isMuxVideo) && videoRef.current) {
+          // Always reset to beginning and play for HTML5 video (including MUX)
           videoRef.current.currentTime = 0
           videoRef.current.play().catch((err) => console.error(`Error playing video ${index}:`, err))
         } else if (iframeRef.current) {
@@ -89,7 +89,7 @@ export default function VideoContainer({
         }
       } else {
         // If video becomes inactive - ALWAYS pause and reset
-        if (isSpecialBlobVideo && videoRef.current) {
+        if ((isSpecialBlobVideo || isMuxVideo) && videoRef.current) {
           videoRef.current.pause()
           videoRef.current.currentTime = 0
         } else if (iframeRef.current) {
@@ -104,13 +104,13 @@ export default function VideoContainer({
       // Update previous state
       previousActiveState.current = isActive
     }
-  }, [isActive, index, isSpecialBlobVideo])
+  }, [isActive, index, isSpecialBlobVideo, isMuxVideo])
 
   // Additional effect to ensure videos are paused when not visible or active
   useEffect(() => {
     // If not visible or not active, ensure video is paused
     if (!isVisible || !isActive) {
-      if (isSpecialBlobVideo && videoRef.current) {
+      if ((isSpecialBlobVideo || isMuxVideo) && videoRef.current) {
         videoRef.current.pause()
         // Reset to beginning when inactive
         videoRef.current.currentTime = 0
@@ -119,12 +119,12 @@ export default function VideoContainer({
 
     // If visible and active, ensure video is playing
     if (isVisible && isActive) {
-      if (isSpecialBlobVideo && videoRef.current) {
+      if ((isSpecialBlobVideo || isMuxVideo) && videoRef.current) {
         videoRef.current.currentTime = 0
         videoRef.current.play().catch((err) => console.error(`Error playing video ${index}:`, err))
       }
     }
-  }, [isVisible, isActive, isSpecialBlobVideo, index])
+  }, [isVisible, isActive, isSpecialBlobVideo, isMuxVideo, index])
 
   // Load HLS.js for MUX videos
   useEffect(() => {
@@ -141,6 +141,7 @@ export default function VideoContainer({
 
             hls.on(Hls.Events.MANIFEST_PARSED, () => {
               setIsLoaded(true)
+              // Don't auto-play here - let the active state effect handle it
             })
 
             hls.on(Hls.Events.ERROR, (event, data) => {
@@ -153,7 +154,10 @@ export default function VideoContainer({
           } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
             // Native HLS support (Safari)
             videoRef.current.src = video.blob_url!
-            setIsLoaded(true)
+            videoRef.current.onloadeddata = () => {
+              setIsLoaded(true)
+              // Don't auto-play here - let the active state effect handle it
+            }
           } else {
             setIsError(true)
           }
@@ -172,7 +176,7 @@ export default function VideoContainer({
         }
       }
     }
-  }, [isMuxVideo, video.blob_url])
+  }, [isMuxVideo, video.blob_url, isActive, index])
 
   // Reset error state when video changes or becomes active
   useEffect(() => {
@@ -338,8 +342,16 @@ export default function VideoContainer({
                 muted={isMuted}
                 loop
                 playsInline
+                autoPlay={isActive}
                 onLoadedData={() => !isMuxVideo && setIsLoaded(true)} // Only set loaded for non-MUX videos
                 onError={() => setIsError(true)}
+                onEnded={() => {
+                  // Ensure looping for MUX videos
+                  if (isMuxVideo && videoRef.current && isActive) {
+                    videoRef.current.currentTime = 0
+                    videoRef.current.play().catch((err) => console.error(`Error restarting MUX video ${index}:`, err))
+                  }
+                }}
               />
             ) : (
               // Use iframe for Vimeo videos
