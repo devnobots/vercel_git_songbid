@@ -107,13 +107,6 @@ export default function BidDialog({ isOpen, onClose }: BidDialogProps) {
                       unoptimized
                     />
                     {/* Song title overlay - REMOVED as requested */}
-
-                    {/* Rank indicator - styled to match song title container height exactly */}
-                    <div className="absolute top-0 right-0 z-10 m-4">
-                      <div className="bg-green-300 px-3 py-1 rounded inline-flex items-center h-7">
-                        <span className="text-sm font-light">Rank #3</span>
-                      </div>
-                    </div>
                   </>
                 )}
               </div>

@@ -371,6 +371,16 @@ export default function VideoContainer({
             )}
           </div>
         </div>
+
+        {/* Ranking overlay - Only visible when video is active/playing */}
+        {isActive && isLoaded && (
+          <div className="absolute top-4 left-4 z-30">
+            <div className="bg-black bg-opacity-75 px-3 py-1 rounded-md">
+              <span className="text-white text-sm font-elegant-typewriter font-medium">#{index + 1} THIS WEEK</span>
+            </div>
+          </div>
+        )}
+
         {/* BID Button - Only visible when video is active/playing */}
         {isActive && isLoaded && (
           <div className="absolute bottom-4 right-4 z-30">
