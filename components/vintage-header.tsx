@@ -13,7 +13,7 @@ export default function VintageHeader({ showSubtitle = false, feedPage = false }
     <div className="w-full content-layer">
       <div className="flex flex-col items-center">
         {/* Adjust height based on page type */}
-        <div className="relative" style={{ height: `${logoHeight}px` }}>
+        <div className="relative mb-[30px] sm:mb-0" style={{ height: `${logoHeight}px` }}>
           <Link href="/">
             <img
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/SongBid_darker-6JQyDQAgoKWVvaj596RB2zsaeC40kd.png"
