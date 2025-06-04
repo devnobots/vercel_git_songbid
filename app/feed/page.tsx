@@ -204,7 +204,10 @@ export default function FeedPage() {
     <main className="min-h-screen bg-paper">
       {/* Copyright Notice Dialog */}
       <Dialog open={showCopyrightNotice} onOpenChange={setShowCopyrightNotice}>
-        <DialogContent className="sm:max-w-md p-0 border-0">
+        <DialogContent
+          className="sm:max-w-md p-0 border-0 [&>button]:hidden [&_button[aria-label='Close']]:hidden"
+          hideCloseButton={true}
+        >
           <CopyrightNoticeDialog onClose={handleCloseCopyrightNotice} />
         </DialogContent>
       </Dialog>

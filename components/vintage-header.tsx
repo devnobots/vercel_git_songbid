@@ -7,7 +7,8 @@ interface VintageHeaderProps {
 
 export default function VintageHeader({ showSubtitle = false, feedPage = false }: VintageHeaderProps) {
   // Calculate height based on whether it's the feed page or not
-  const logoHeight = feedPage ? 94.5 : 105 // 10% smaller: 105 * 0.9 = 94.5
+  // For homepage (not feedPage), make it 10% smaller: 105 * 0.9 = 94.5
+  const logoHeight = feedPage ? 105 : 94.5
 
   return (
     <div className="w-full content-layer">

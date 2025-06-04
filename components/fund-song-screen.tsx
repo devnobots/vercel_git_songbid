@@ -102,19 +102,19 @@ export default function FundSongScreen({
   return (
     <>
       <Dialog open={isOpen && !showPaymentMethods} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-md p-0 bg-gray-50 rounded-xl overflow-hidden border-0">
+        <DialogContent className="sm:max-w-md p-0 bg-[#f5f1e8] rounded-xl overflow-hidden border-0 [&>button]:hidden">
           <div className="p-6 pt-4 relative">
             {/* Top icon - Using Lock icon from payment dialog */}
             <div className="flex justify-center mb-4">
               <div className="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center">
-                <Lock className="h-7 w-7 text-green-500" />
+                <Lock className="h-7 w-7 text-[#8b7355]" />
               </div>
             </div>
 
             {/* Updated title structure - "Securely Fund" with song title below it */}
             <div className="text-center mb-5">
-              <h2 className="text-2xl font-bold">{mainTitle}</h2>
-              {!isTipMode && <p className="text-gray-700 mt-1">{songTitle}</p>}
+              <h2 className="text-2xl font-bold font-elegant-typewriter text-[#8b7355]">{mainTitle}</h2>
+              {!isTipMode && <p className="text-[#6b5a47] mt-1 font-elegant-typewriter">{songTitle}</p>}
             </div>
 
             {/* Amount options - Updated with new amounts */}
@@ -123,15 +123,15 @@ export default function FundSongScreen({
                 <button
                   key={index}
                   onClick={() => handleAmountSelect(amount)}
-                  className={`p-3 rounded-lg border ${
+                  className={`p-3 rounded-lg border font-elegant-typewriter ${
                     selectedAmount === amount
-                      ? "bg-blue-100 border-blue-400 text-blue-800"
-                      : "bg-white border-gray-200 text-gray-800"
+                      ? "bg-[#ede5d8] border-[#8b7355] text-[#8b7355]"
+                      : "bg-white border-[#d4c4a8] text-[#6b5a47]"
                   } transition-colors`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-medium">${amount}</span>
-                    {selectedAmount === amount && <Check className="w-5 h-5 text-blue-500" />}
+                    {selectedAmount === amount && <Check className="w-5 h-5 text-[#8b7355]" />}
                   </div>
                 </button>
               ))}
@@ -139,31 +139,37 @@ export default function FundSongScreen({
 
             {/* Custom amount input - Fixed for Android */}
             <div className="mb-5">
-              <div className="flex items-center border border-gray-300 rounded-lg p-2 bg-white">
-                <span className="text-gray-500 text-xl ml-2 flex-shrink-0">$</span>
+              <div className="flex items-center border border-[#d4c4a8] rounded-lg p-2 bg-white">
+                <span className="text-[#8b7355] text-xl ml-2 flex-shrink-0 font-elegant-typewriter">$</span>
                 <input
                   type="text"
                   inputMode="numeric"
                   value={customAmount}
                   onChange={handleCustomAmountChange}
-                  className="flex-1 p-2 text-xl font-bold outline-none w-full bg-transparent"
+                  className="flex-1 p-2 text-xl font-bold outline-none w-full bg-transparent font-elegant-typewriter text-[#6b5a47]"
                   placeholder="Other amount"
                   style={{ WebkitAppearance: "none" }}
                 />
-                <span className="text-gray-400 mr-2 flex-shrink-0">USD</span>
+                <span className="text-[#8b7355] mr-2 flex-shrink-0 font-elegant-typewriter">USD</span>
               </div>
             </div>
 
             {/* Additional options - Fixed for Android */}
             <div className="space-y-2 mb-5">
-              <p className="text-gray-600 flex items-center">
+              <p className="text-[#6b5a47] flex items-center font-elegant-typewriter">
                 <span>Where exactly does your</span>{" "}
-                <button onClick={handleSupportGoClick} className="ml-1 text-gray-700 underline focus:outline-none">
+                <button
+                  onClick={handleSupportGoClick}
+                  className="ml-1 text-[#8b7355] underline focus:outline-none font-elegant-typewriter"
+                >
                   Support Go?
                 </button>
               </p>
-              <p className="text-gray-600">
-                <button onClick={handleFeedbackClick} className="text-gray-700 underline focus:outline-none">
+              <p className="text-[#6b5a47] font-elegant-typewriter">
+                <button
+                  onClick={handleFeedbackClick}
+                  className="text-[#8b7355] underline focus:outline-none font-elegant-typewriter"
+                >
                   Leave us Feedback
                 </button>
               </p>
@@ -172,7 +178,7 @@ export default function FundSongScreen({
             {/* Fund/Tip button */}
             <Button
               onClick={handleSubmit}
-              className="w-full py-5 text-xl bg-[#e84c30] hover:bg-[#e84c30]/90 text-white"
+              className="w-full py-5 text-xl bg-[#f5f1e8] hover:bg-[#ede5d8] text-[#8b7355] border border-[#8b7355] rounded-full font-elegant-typewriter"
             >
               {buttonText}
             </Button>
