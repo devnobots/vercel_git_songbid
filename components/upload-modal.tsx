@@ -168,14 +168,14 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }: Upload
             <VideoRecordingTips onClose={handleCloseRecordingTips} />
           </div>
         ) : (
-          <div className="p-4">
+          <div className="p-4 bg-[#f5f1e8] font-elegant-typewriter">
             <DialogHeader className="text-center pb-2">
-              <DialogTitle className="text-xl">Upload Your Performance</DialogTitle>
+              <DialogTitle className="text-xl text-[#8b7355]">Upload Your Performance</DialogTitle>
             </DialogHeader>
 
             <form onSubmit={handleSubmit} className="space-y-4 pt-2">
               <div>
-                <Label htmlFor="video" className="block text-left w-full mb-1">
+                <Label htmlFor="video" className="block text-left w-full mb-1 text-[#6b5a47]">
                   Video File (Max 300MB)
                 </Label>
                 <div className="flex items-center border-b border-gray-300 pb-2">
@@ -201,7 +201,7 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }: Upload
               </div>
 
               <div>
-                <Label htmlFor="artistName" className="block text-left w-full mb-1">
+                <Label htmlFor="artistName" className="block text-left w-full mb-1 text-[#6b5a47]">
                   Artist Name
                 </Label>
                 <Input
@@ -210,12 +210,12 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }: Upload
                   onChange={(e) => setArtistName(e.target.value)}
                   disabled={isUploading}
                   placeholder="What do you like to be called?"
-                  className="w-full border-b border-gray-300 rounded-none px-0 py-2 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className="w-full border-b border-[#8b7355] rounded-none px-0 py-2 focus-visible:ring-0 focus-visible:ring-offset-0"
                 />
               </div>
 
               <div>
-                <Label htmlFor="songTitle" className="block text-left w-full mb-1">
+                <Label htmlFor="songTitle" className="block text-left w-full mb-1 text-[#6b5a47]">
                   Song Title
                 </Label>
                 <Input
@@ -224,7 +224,7 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }: Upload
                   onChange={(e) => setSongTitle(e.target.value)}
                   disabled={isUploading}
                   placeholder="What's the name of your song?"
-                  className="w-full border-b border-gray-300 rounded-none px-0 py-2 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className="w-full border-b border-[#8b7355] rounded-none px-0 py-2 focus-visible:ring-0 focus-visible:ring-offset-0"
                 />
               </div>
 
@@ -258,8 +258,10 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }: Upload
                 ) : (
                   <Button
                     type="submit"
-                    className={`w-full py-4 text-white ${
-                      isFormComplete ? "bg-[#e84c30] hover:bg-[#e84c30]/90" : "bg-[#f8a0a0] hover:bg-[#f8a0a0]/90"
+                    className={`w-full py-4 ${
+                      isFormComplete
+                        ? "bg-[#f5f1e8] text-[#8b7355] hover:bg-[#ede5d8] rounded-full"
+                        : "bg-[#f8a0a0] hover:bg-[#f8a0a0]/90"
                     }`}
                     disabled={isUploading || !file}
                   >
@@ -270,7 +272,7 @@ export default function UploadModal({ isOpen, onClose, onUploadSuccess }: Upload
                 <Button
                   type="button"
                   onClick={handleShowRecordingTips}
-                  className="w-full py-4 bg-green-600 hover:bg-green-700 text-white"
+                  className="w-full py-4 bg-[#8b7355] text-[#f5f1e8] hover:bg-[#6b5a47] rounded-full"
                 >
                   Video Recording Tips
                 </Button>
