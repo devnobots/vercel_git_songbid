@@ -61,11 +61,16 @@ export default function FeedbackDialog({ isOpen, onClose }: FeedbackDialogProps)
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md p-0 bg-[#f5f1e8] rounded-xl overflow-hidden border-0 font-elegant-typewriter">
+      <DialogContent className="sm:max-w-md p-0 bg-white rounded-xl overflow-hidden border-0">
         <div className="px-6 pt-6 pb-6 relative">
+          {/* Top title - Fixed to be center aligned */}
+          <div className="flex justify-center items-center mb-8">
+            <h3 className="text-lg font-semibold text-center w-full">Leave us Feedback</h3>
+          </div>
+
           {/* Main title - Updated with final copy */}
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-[#8b7355]">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold">
               What do you think about
               <br />
               the Song Bid concept?
@@ -94,7 +99,7 @@ export default function FeedbackDialog({ isOpen, onClose }: FeedbackDialogProps)
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Add a comment..."
-              className="w-full p-4 border border-[#8b7355] rounded-md min-h-[120px] focus:outline-none focus:ring-2 focus:ring-[#8b7355] text-[#6b5a47]"
+              className="w-full p-4 border border-gray-200 rounded-md min-h-[120px] focus:outline-none focus:ring-2 focus:ring-[#e84c30]"
               style={{ WebkitAppearance: "none" }}
             />
           </div>
@@ -103,7 +108,7 @@ export default function FeedbackDialog({ isOpen, onClose }: FeedbackDialogProps)
           <div className="px-0">
             <Button
               onClick={handleSubmit}
-              className="w-full py-5 text-xl bg-[#f5f1e8] text-[#8b7355] hover:bg-[#ede5d8] rounded-full"
+              className="w-full py-5 text-xl bg-[#e84c30] hover:bg-[#e84c30]/90 text-white"
             >
               Send Feedback
             </Button>

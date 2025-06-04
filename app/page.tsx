@@ -14,8 +14,8 @@ export default function Home() {
 
       {/* Content directly on paper background */}
       <div
-        className="w-full pt-2 sm:pt-10 pb-1 flex flex-col px-6 max-w-md mx-auto content-layer sm:mt-[-40px]"
-        style={{ marginTop: "-20px" }}
+        className="w-full pt-2 sm:pt-10 pb-1 flex flex-col px-6 max-w-md mx-auto content-layer"
+        style={{ marginTop: "-20px", "@media (min-width: 640px)": { marginTop: "-40px" } }}
       >
         {/* Main description - first paragraph now semi-bold */}
         <div className="text-center mb-4 sm:mb-7">

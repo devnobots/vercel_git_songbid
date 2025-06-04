@@ -36,10 +36,6 @@ export default function BidDialog({ isOpen, onClose }: BidDialogProps) {
     setShowArtistBio(true)
   }
 
-  const handleMaybeLater = () => {
-    onClose()
-  }
-
   // Reset error states when dialog opens
   useEffect(() => {
     if (isOpen) {
@@ -85,7 +81,7 @@ export default function BidDialog({ isOpen, onClose }: BidDialogProps) {
     <>
       <Dialog open={isOpen} onOpenChange={onClose}>
         <DialogContent
-          className="sm:max-w-md p-0 bg-[#f5f1e8] rounded-xl overflow-hidden border-0 [&>button]:hidden [&_button[aria-label='Close']]:hidden"
+          className="sm:max-w-md p-0 bg-gray-50 rounded-xl overflow-hidden border-0"
           hideCloseButton={true}
         >
           <div className="p-4 relative">
@@ -115,10 +111,10 @@ export default function BidDialog({ isOpen, onClose }: BidDialogProps) {
                 )}
               </div>
 
-              {/* Card Footer - Updated layout with centered Fund Song button */}
-              <div className="p-3 bg-[#8b7355] grid grid-cols-3 items-center">
-                {/* Left section: Avatar and text */}
-                <div className="flex items-center col-span-2">
+              {/* Card Footer - Updated layout with Top Supporter removed */}
+              <div className="p-3 flex justify-between items-center bg-gradient-to-r from-amber-700 to-amber-900">
+                {/* Avatar and text side by side */}
+                <div className="flex items-center">
                   {/* Avatar in square */}
                   <div className="w-10 h-10 rounded-md overflow-hidden flex-shrink-0 bg-gray-300 flex items-center justify-center">
                     {avatarError ? (
@@ -137,56 +133,43 @@ export default function BidDialog({ isOpen, onClose }: BidDialogProps) {
 
                   {/* Text to the right of avatar */}
                   <div className="flex flex-col ml-2">
-                    <span className="text-white font-bold text-xl font-elegant-typewriter">$120</span>
-                    <span className="text-gray-200 text-sm -mt-1 font-elegant-typewriter">
+                    <span className="text-white font-bold text-xl">$120</span>
+                    <span className="text-gray-200 text-sm -mt-1">
                       Top Bid <span className="underline">@macPaul</span>
                     </span>
                   </div>
                 </div>
 
-                {/* Right section: Fund Song button - centered in its column */}
-                <div className="flex justify-center">
-                  <Button
-                    className="bg-[#d4a574] hover:bg-[#c4956a] text-gray-700 border-none rounded-full px-4 py-2 font-elegant-typewriter"
-                    onClick={handleFundClick}
-                  >
-                    Fund Song
-                  </Button>
-                </div>
+                {/* Fund Song button */}
+                <Button
+                  className="bg-[#e84c30] hover:bg-[#e84c30]/90 text-white border-none rounded-md px-4 py-2"
+                  onClick={handleFundClick}
+                >
+                  Fund Song
+                </Button>
               </div>
             </div>
 
-            {/* Creator Profile - Improved styling and layout */}
-            {/* Creator Profile - Reduced height, better alignment, smaller font */}
-            <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100 mt-[15px] mb-4">
-              <div className="grid grid-cols-3 items-center">
-                <div className="col-span-2 text-center">
-                  <h3 className="font-bold text-lg font-elegant-typewriter text-gray-800 leading-tight">
-                    Silver Rayleigh
-                  </h3>
-                  <p className="text-gray-500 text-sm font-elegant-typewriter leading-tight">
-                    Sunnyvale, CA - 1206 Backers
-                  </p>
-                </div>
-
-                <div className="flex justify-center">
-                  <Button
-                    className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-full px-4 py-1.5 font-elegant-typewriter"
-                    onClick={handleArtistBioClick}
-                  >
-                    Artist Bio
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Maybe Later button */}
-            <Button
-              onClick={handleMaybeLater}
-              className="w-full py-3 bg-[#f5f1e8] hover:bg-[#ede5d8] text-[#8b7355] border border-[#8b7355] rounded-full font-elegant-typewriter"
+            {/* Creator Profile - Added 15px top margin to create space between sections */}
+            <div
+              className="bg-white rounded-xl p-4 shadow border border-gray-100 mt-[15px]"
+              style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}
             >
-              Maybe Later
-            </Button>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-bold text-xl">Silver Rayleigh</h3>
+                  <p className="text-gray-500 text-sm">Sunnyvale, CA - 1206 Backers</p>
+                </div>
+
+                {/* Artist Bio button */}
+                <Button
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-full px-4"
+                  onClick={handleArtistBioClick}
+                >
+                  Artist Bio
+                </Button>
+              </div>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
